@@ -60,7 +60,7 @@ public class GameTimerManager {
         setQueueTimer(240);
     }
 
-    private void setQueueTimer(int newQueueTimer) {
+    public void setQueueTimer(int newQueueTimer) {
         // Check if the new queue timer is less than 60 seconds
         if (newQueueTimer < 60) {
             // If the new queue timer is less than 60 seconds, reset it to the default value (240 seconds)
@@ -139,9 +139,6 @@ public class GameTimerManager {
         if (deathmatchTimerExecutor != null) deathmatchTimerExecutor.shutdownNow();
     }
 
-    public int getQueueTimer() {
-        return (int) queueTimer;
-    }
 
     public Plugin getPlugin() {
         // Return the plugin instance if needed
@@ -151,4 +148,20 @@ public class GameTimerManager {
     public GameStates getCurrentState() {
         return currentState;
     }
+
+
+	public int getQueueTimer() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean isGameReady() {
+		// TODO Auo-generated method stub
+		return false;
+	}
+
+	public void startGame() {
+		// TODO Auto-generated method stub
+		
+	}
 }

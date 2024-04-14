@@ -1,0 +1,10 @@
+name: Hytile-QuickSG
+main: com.hytile.QuickSGPlugin
+version: '0.1'
+commands:
+  fix:
+    usage: /fix
+    description: To fix players' latency
+  forcestart:
+    usage: /forcestart
+    description: To force start the sg game

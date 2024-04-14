@@ -24,8 +24,8 @@ public class XEvents implements Listener {
         Player player = event.getPlayer();
         if (gameTimerManager.getCurrentState() == GameStates.LOBBY) {
             player.setGameMode(GameMode.ADVENTURE);
-            player.setFoodLevel(20);
-            player.setSaturation(20);
+            player.setFoodLevel(999999999);
+            player.setSaturation(1);
             player.setCanPickupItems(false); // Disallow picking up items
         } else {
             player.setGameMode(GameMode.SURVIVAL);
@@ -49,8 +49,8 @@ public class XEvents implements Listener {
         Player player = event.getPlayer();
         if (event.getNewGameMode() == GameMode.SURVIVAL) {
             if (gameTimerManager.getCurrentState() == GameStates.LOBBY) {
-                player.setFoodLevel(20);
-                player.setSaturation(20);
+                player.setFoodLevel(999999999);
+                player.setSaturation(1);
                 player.setCanPickupItems(false); // Disallow picking up items
             } else {
                 player.setCanPickupItems(true); // Allow picking up items

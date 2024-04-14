@@ -15,10 +15,12 @@ public class XgameEvent implements Listener {
 
     private final GameTimerManager gameTimerManager;
     private final Plugin plugin; // Store the plugin instance
+    private boolean shortQueueTimer; // Flag to indicate whether to shorten the queue timer
 
     public XgameEvent(GameTimerManager gameTimerManager, Plugin plugin) {
         this.gameTimerManager = gameTimerManager;
         this.plugin = plugin; // Initialize the plugin instance
+        this.shortQueueTimer = false; // Initialize the flag
     }
 
     @EventHandler
@@ -33,12 +35,28 @@ public class XgameEvent implements Listener {
                 } else {
                     player.setExp(0);
                     player.setTotalExperience(0);
-                    gameTimerManager.startGameTimer();
+                    if (shortQueueTimer) {
+                        gameTimerManager.setQueueTimer(60); // Set queue timer to 60 seconds
+                        gameTimerManager.startGameTimer();
+                        shortQueueTimer = false; // Reset the flag
+                    } else {
+                        gameTimerManager.startGameTimer();
+                    }
                 }
             }, 0, 20);
         } else {
             gameTimerManager.startQueueTimer();
+            // Check if the queue timer needs to be shortened
+            if (Bukkit.getOnlinePlayers().size() >= 8) {
+                shortQueueTimer = true;
+            }
         }
     }
 
+    // Method to reset the 240-second timer in the XP bar
+    public void resetTimer(Player player) {
+        if (!shortQueueTimer) {
+            player.setLevel(240);
+        }
+    }
 }
