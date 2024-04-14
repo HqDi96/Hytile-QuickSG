@@ -4,12 +4,14 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.hytile.game.GameStates;
 import com.hytile.game.GameTimerManager;
+
+
 
 public class XEvents implements Listener {
 
@@ -21,6 +23,9 @@ public class XEvents implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+    	
+    	
+
         Player player = event.getPlayer();
         if (gameTimerManager.getCurrentState() == GameStates.LOBBY) {
             player.setGameMode(GameMode.ADVENTURE);

@@ -14,9 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.hytile.Initializer;
+import com.hytile.game.GameStates;
 import com.hytile.game.GameTimerManager;
+import com.hytile.managers.GameScoreboardAdapter;
 import com.hytile.utils.ColorUtils;
 
+import dev.mqzen.boards.BoardManager;
 import net.md_5.bungee.api.ChatColor;
 
 public class GamePlayerUtils implements Listener {
@@ -61,16 +64,23 @@ public class GamePlayerUtils implements Listener {
         event.getPlayer().getInventory().setItem(0, votingPaper);
         event.getPlayer().getInventory().setItem(4, rulesBook);
         event.getPlayer().getInventory().setItem(8, exitSlime);
+        
+        //SCOREBOARD REGISTRATION
+        BoardManager.getInstance().setupNewBoard(event.getPlayer(), new GameScoreboardAdapter(GameStates.LOBBY));
     }
     
     
      @EventHandler
      public void onPlayerLeaveEvent(PlayerQuitEvent event) {
+    	 // PLAYER LEAVE MESSAGE BLA BLA
     	 event.setQuitMessage(null);
          int onlinePlayers = Bukkit.getOnlinePlayers().size() - 1;
          int maxPlayers = Bukkit.getMaxPlayers();
          String message = ColorUtils.translatedMessage(Initializer.PREFIX+"&e" + event.getPlayer().getName() + " &ahas left the server&8 (&a" + onlinePlayers + "/&a" + maxPlayers + "&8)");
          Bukkit.broadcastMessage(message);
+         
+         // SCOREBOARD REGISTRATION
+ 		BoardManager.getInstance().removeBoard(event.getPlayer());
 
    }
 }

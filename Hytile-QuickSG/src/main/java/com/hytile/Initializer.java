@@ -3,6 +3,7 @@ package com.hytile;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -19,6 +20,7 @@ import com.hytile.game.utils.XgameEvent;
 import com.hytile.handlers.GuiHandlers;
 import com.hytile.utils.ColorUtils;
 
+import dev.mqzen.boards.BoardManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +54,8 @@ public class Initializer {
       registerTimer();
       // COMMAND REGISTRIATION
       registerCommand();
+      // SCOREBOARD REGISTRATION
+      registerBoard();
     }
     
     public void pluginDisable (JavaPlugin plugin) {
@@ -108,6 +112,13 @@ public class Initializer {
             plugin.getLogger().warning("Failed to register the 'forcestart' command. Command not found.");
         }
     }
+    
+    public void registerBoard() {
+        BoardManager.load(plugin);
+        BoardManager.getInstance().setUpdateInterval(4L);
+        BoardManager.getInstance().startBoardUpdaters();
+    }
+
 
     public Command getCommand(String label) {
         return plugin.getCommand(label);

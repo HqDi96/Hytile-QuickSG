@@ -164,4 +164,11 @@ public class GameTimerManager {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	public void prepareRound() {
+		// TODO Auto-generated method stub
+		
+	}
 }

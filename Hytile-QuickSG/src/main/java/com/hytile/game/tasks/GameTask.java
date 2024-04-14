@@ -20,8 +20,16 @@ public class GameTask extends BukkitRunnable {
         } else if (gameTimerManager.getCurrentState() == GameStates.LOBBY) {
             // Check if the game is ready to start (e.g., if forcestart command is executed)
             if (gameTimerManager.isGameReady()) {
-                // Start the game
-                gameTimerManager.startGame();
+                // Transition to the prepare round
+                gameTimerManager.prepareRound();
+                // Schedule the transition to in-game state after prepare round (e.g., 30 seconds)
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        // Transition to the in-game state
+                        gameTimerManager.startGame();
+                    }
+                }.runTaskLater(gameTimerManager.getPlugin(), 20L * 30); // 20 ticks per second, 30 seconds
             }
         }
     }

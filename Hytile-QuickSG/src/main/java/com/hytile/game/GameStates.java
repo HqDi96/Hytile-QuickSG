@@ -5,5 +5,6 @@ public enum GameStates {
 	LOBBY,
 	INGAME,
 	DEATHMATCH,
+	PREPAREROUND,
 
 }
